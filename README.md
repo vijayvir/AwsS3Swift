@@ -9,17 +9,17 @@ Amazon S3 is cloud storage for the internet. To upload your data (photos, videos
 
 This class have  three main function 
 
-`configure() ` : Here  you set your bucketName , accessToken and Secret Key 
-` upload() `    upload  the data to the bucket  , with type  and get  the call back of key and type you send  
+-  `configure() ` : Here  you set your bucketName , accessToken and Secret Key 
+-  ` upload() `    upload  the data to the bucket  , with type  and get  the call back of key and type you send  
 
 Function declaration 
-```
+```swift
 func upload(key: String? = NSUUID().uuidString, data: Data, type: LeoAwsS3.TypeFile? = .image, callbackKey: ((String, LeoAwsS3.TypeFile) -> ())? = nil)
 
 ```
 
 Function  calling 
-```
+````swift
 LeoAwsS3.shared.upload( data: imahe) { (key, type) in
 
 DispatchQueue.main.async {
