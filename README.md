@@ -11,10 +11,9 @@ This class have  three main function
 
 -  `configure() ` : Here  you set your bucketName , accessToken and Secret Key 
 This class required three things  in configure method 
-- ` accessKey` and  ` secretKey`  is  of the user who have access to read and write in the S3 bucket. 
+* ` accessKey` and  ` secretKey`  is  of the user who have access to read and write in the S3 bucket. 
 Please make sure you have given the premission to read  and write to S3 bucket. It will be assign for every user from AWS who want to access the bucket
-
-- `bucketName`  bucket name where you have to upload the data 
+* `bucketName`  bucket name where you have to upload the data 
 
 
 -  ` upload() `    upload  the data to the bucket  , with type  and get  the call back of key and type you send  
@@ -60,3 +59,4 @@ ___
 ```
 
 ```
+
