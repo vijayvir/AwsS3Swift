@@ -16,21 +16,21 @@ class LeoAwsS3 {
     }
     
     static var  shared : LeoAwsS3 = LeoAwsS3()
-
-    let accessKey = "*****7CEWO6OW"
-    let secretKey = "*****cpT+PEpfRWHiOmrpBxWuBUI4R4lad"
-    let bucketName = "*****imageapp"
-    let bucketArn = "*****::testshareimageapp"
+    
+    let accessKey = "eweqwP7CEWO6OW"
+    let secretKey = "888cp********RWHiOmrpBxWuBUI4R4lad"
+    let bucketName = "t*****eimageapp"
+    let bucketArn = "*****tshareimageapp"
     
     private init() {
-
+        
         configure()
     }
     
     func run(_ callback : (() -> ())? = nil ) {
         callback?()
     }
- 
+    
     private func configure() {
         let credentialsProvider2 = AWSStaticCredentialsProvider(accessKey: accessKey,
                                                                 secretKey: secretKey)
@@ -40,31 +40,32 @@ class LeoAwsS3 {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
     }
-
+    
     func upload(key :String? = NSUUID().uuidString ,
                 data : Data ,
                 type : TypeFile? = .image ,
+                withProgressCallback : ( (Double) -> ())? = nil  ,
                 callbackKey: ((String , TypeFile ) -> ())? = nil  ){
         
         let transferManager = AWSS3TransferUtility.default()
         
         let expression = AWSS3TransferUtilityUploadExpression()
         expression.progressBlock = { (task , progress) in
-            
+            withProgressCallback?(progress.fractionCompleted)
             print("progress->",progress.fractionCompleted)
         }
-
+        
         transferManager.uploadData(data,
                                    bucket: bucketName,
                                    key: key!,
-              contentType: "image/jpeg",
-              expression: expression) { (task, error) in
-                if error  == nil {
-                    callbackKey?(key! , type! )
-                }
-                
-       
-                
+                                   contentType: "image/jpeg",
+                                   expression: expression) { (task, error) in
+                                    if error  == nil {
+                                        callbackKey?(key! , type! )
+                                    }
+                                    
+                                    
+                                    
             }.continueWith { (task) -> Any? in
                 if (task.result != nil) {
                     print("beginning upload")
@@ -75,14 +76,14 @@ class LeoAwsS3 {
         
     }
     
-
+    
     
     func download(key : String ,  callbackData : ((Data?) -> ())? = nil ) {
-    
-   
+        
+        
         let expression = AWSS3TransferUtilityDownloadExpression()
         expression.progressBlock = { (task , progress) in
-           // print("progress->",progress.fractionCompleted)
+            // print("progress->",progress.fractionCompleted)
             
         }
         let transferUtility = AWSS3TransferUtility.default()
@@ -93,8 +94,8 @@ class LeoAwsS3 {
                                         if data != nil {
                                             callbackData?(data)
                                         }
-                          
-                                                                                
+                                        
+                                        
         }
         
         
