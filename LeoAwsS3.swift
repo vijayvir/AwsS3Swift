@@ -17,10 +17,10 @@ class LeoAwsS3 {
     
     static var  shared : LeoAwsS3 = LeoAwsS3()
 
-    let accessKey = "AKIAZP3MNPHP7CEWO6OW"
-    let secretKey = "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"
-    let bucketName = "testshareimageapp"
-    let bucketArn = "arn:aws:s3:::testshareimageapp"
+    let accessKey = "*****7CEWO6OW"
+    let secretKey = "*****cpT+PEpfRWHiOmrpBxWuBUI4R4lad"
+    let bucketName = "*****imageapp"
+    let bucketArn = "*****::testshareimageapp"
     
     private init() {
 
